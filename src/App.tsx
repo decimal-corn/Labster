@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { Col, Container, Nav, Row } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+import { Content } from './components/Content/Content'
 
-function App() {
+export const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Container fluid>
+      <Row lg={12}>
+        <Col lg={{ span: 2, offset: 2 }}>
+          <Nav defaultActiveKey='/overview' className='flex-column'>
+            <Nav.Item>
+              <Nav.Link as={Link} eventKey='overview' to='/overview'>
+                Overview
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link as={Link} eventKey='new' to='/new'>
+                Add new dictionary
+              </Nav.Link>
+            </Nav.Item>
+          </Nav>
+        </Col>
+        <Col lg={{ span: 7 }}>
+          <Content />
+        </Col>
+      </Row>
+    </Container>
+  )
 }
-
-export default App;
