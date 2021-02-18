@@ -7,3 +7,9 @@ export const getDictionaries = createSelector(
   getDictionariesState,
   (dictionaries) => dictionaries,
 )
+
+export const getDictionary = createSelector(
+  getDictionariesState,
+  (_: RootState, id: string) => id,
+  (dictionaries, id) => dictionaries[id],
+)

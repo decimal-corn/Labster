@@ -15,9 +15,9 @@ const initialState: Record<string, Dictionary> = {
   [uuid()]: {
     name: 'First dict',
     data: [
-      ['ph', 'Biology'],
-      ['Atoms', 'Chemistry'],
-      ['Circuit Building', 'Physics'],
+      { left: 'ph', right: 'Biology' },
+      { left: 'Atoms', right: 'Chemistry' },
+      { left: 'Circuit Building', right: 'Physics' },
     ],
   },
 }
@@ -29,16 +29,11 @@ export const {
   name: 'dictionaries',
   initialState,
   reducers: {
-    push: {
-      prepare: (dictionary: Dictionary) => {
-        return { payload: { dictionary, id: uuid() } }
-      },
-      reducer: (
-        state,
-        action: PayloadAction<{ dictionary: Dictionary; id: string }>,
-      ) => {
-        state[action.payload.id] = action.payload.dictionary
-      },
+    push: (
+      state,
+      action: PayloadAction<{ dictionary: Dictionary; id: string }>,
+    ) => {
+      state[action.payload.id] = action.payload.dictionary
     },
     remove: (state, action: PayloadAction<{ id: string }>) => {
       const id = action.payload.id

@@ -8,9 +8,9 @@ export const App = () => {
     <Container fluid>
       <Row lg={12}>
         <Col lg={{ span: 2, offset: 2 }}>
-          <Nav defaultActiveKey='/overview' className='flex-column'>
+          <Nav defaultActiveKey='/' className='flex-column'>
             <Nav.Item>
-              <Nav.Link as={Link} eventKey='overview' to='/overview'>
+              <Nav.Link as={Link} eventKey='overview' to='/'>
                 Overview
               </Nav.Link>
             </Nav.Item>
