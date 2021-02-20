@@ -81,19 +81,23 @@ describe('Testing DictionaryForm component', () => {
     const nameField = screen.getByDisplayValue(TEST_DICTIONARY_1.name)
     userEvent.clear(nameField)
     userEvent.click(saveButton)
-    expect(screen.getByText('Name could not be empty'))
+    expect(screen.getByText('Name could not be empty')).toBeInTheDocument()
     userEvent.type(nameField, 'New name')
 
     const fromField = screen.getByDisplayValue(TEST_DICTIONARY_1.data[0].from)
     userEvent.clear(fromField)
     userEvent.click(saveButton)
-    expect(screen.getByText('Both pair fields should contain a value'))
+    expect(
+      screen.getByText('Both pair fields should contain a value'),
+    ).toBeInTheDocument()
     userEvent.type(fromField, 'New from')
 
     const toField = screen.getByDisplayValue(TEST_DICTIONARY_1.data[0].to)
     userEvent.clear(toField)
     userEvent.click(saveButton)
-    expect(screen.getByText('Both pair fields should contain a value'))
+    expect(
+      screen.getByText('Both pair fields should contain a value'),
+    ).toBeInTheDocument()
     userEvent.type(toField, 'New to')
 
     userEvent.click(screen.getByText('Add new pair'))
@@ -105,13 +109,17 @@ describe('Testing DictionaryForm component', () => {
     userEvent.type(fromFields[1], 'New from')
     userEvent.type(toFields[1], 'New to')
     userEvent.click(saveButton)
-    expect(screen.getByText('Pair contains identical "From" value'))
+    expect(
+      screen.getByText('Pair contains identical "From" value'),
+    ).toBeInTheDocument()
 
     // Fork case
     userEvent.clear(toFields[1])
     userEvent.type(toFields[1], 'Value')
     userEvent.click(saveButton)
-    expect(screen.getByText('Pair contains identical "From" value'))
+    expect(
+      screen.getByText('Pair contains identical "From" value'),
+    ).toBeInTheDocument()
 
     userEvent.type(fromFields[1], '*')
     userEvent.click(saveButton)

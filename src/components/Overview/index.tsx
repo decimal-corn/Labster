@@ -10,13 +10,22 @@ export const Overview = () => {
   const dictionaries = useSelector(getDictionaries)
   const dispatch = useDispatch()
 
-  const [removingDictionary, setRemovingDictionary] = useState<
+  const [removingDictionaryKey, setRemovingDictionaryKey] = useState<
     string | undefined
   >()
 
-  const onDictionaryRemove = useCallback((id: string) => {
-    dispatch(removeDictionary({ id }))
-  }, [])
+  const closeModal = useCallback(() => setRemovingDictionaryKey(undefined), [
+    setRemovingDictionaryKey,
+  ])
+
+  const onDictionaryRemoveConfirm = useCallback(() => {
+    if (!removingDictionaryKey) {
+      // Impossible, but covering this case for type safety
+      return
+    }
+    closeModal()
+    dispatch(removeDictionary({ id: removingDictionaryKey }))
+  }, [removingDictionaryKey])
 
   return (
     <>
@@ -28,7 +37,7 @@ export const Overview = () => {
               <DictionaryCard
                 key={key}
                 dictionaryKey={key}
-                setRemovingDictionary={setRemovingDictionary}
+                setRemovingDictionaryKey={setRemovingDictionaryKey}
               />
             ))}
           </CardColumns>
@@ -44,28 +53,19 @@ export const Overview = () => {
           )}
         </Card.Body>
       </Card>
-      {removingDictionary && (
-        <Modal show={true} onHide={() => setRemovingDictionary(undefined)}>
+      {removingDictionaryKey && (
+        <Modal show={true} onHide={closeModal}>
           <Modal.Header closeButton>
             <Modal.Title>Confirm</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            {`Confirm removing the "${dictionaries[removingDictionary].name}" dictionary`}
+            {`Confirm removing the "${dictionaries[removingDictionaryKey].name}" dictionary`}
           </Modal.Body>
           <Modal.Footer>
-            <Button
-              variant='secondary'
-              onClick={() => setRemovingDictionary(undefined)}
-            >
+            <Button variant='secondary' onClick={closeModal}>
               Cancel
             </Button>
-            <Button
-              variant='danger'
-              onClick={() => {
-                setRemovingDictionary(undefined)
-                onDictionaryRemove(removingDictionary)
-              }}
-            >
+            <Button variant='danger' onClick={onDictionaryRemoveConfirm}>
               Remove
             </Button>
           </Modal.Footer>

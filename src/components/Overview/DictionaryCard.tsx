@@ -6,14 +6,14 @@ import { getDictionaries } from '../../store/selectors'
 
 type Props = {
   dictionaryKey: string
-  setRemovingDictionary: React.Dispatch<
+  setRemovingDictionaryKey: React.Dispatch<
     React.SetStateAction<string | undefined>
   >
 }
 
 export const DictionaryCard = ({
   dictionaryKey,
-  setRemovingDictionary,
+  setRemovingDictionaryKey,
 }: Props) => {
   const dictionaries = useSelector(getDictionaries)
   return (
@@ -50,7 +50,7 @@ export const DictionaryCard = ({
         </Button>
         <Button
           variant='danger'
-          onClick={() => setRemovingDictionary(dictionaryKey)}
+          onClick={() => setRemovingDictionaryKey(dictionaryKey)}
         >
           Remove
         </Button>

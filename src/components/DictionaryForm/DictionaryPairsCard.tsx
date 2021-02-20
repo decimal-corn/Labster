@@ -29,7 +29,7 @@ export const DictionaryPairsCard = () => {
         Dictionary pairs
       </Card.Header>
       <Card.Body>
-        <FieldArray name='data' validate={validatePair}>
+        <FieldArray<DictionaryPair> name='data' validate={validatePair}>
           {({ fields, meta }) => (
             <Form.Group controlId='data'>
               <Row className='mb-2'>
