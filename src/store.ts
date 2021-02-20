@@ -4,7 +4,6 @@ import {
   PayloadAction,
   combineReducers,
 } from '@reduxjs/toolkit'
-import { v4 as uuid } from 'uuid'
 import { Dictionary } from './types'
 
 export type RootState = {
@@ -12,54 +11,15 @@ export type RootState = {
 }
 
 const initialState: Record<string, Dictionary> = {
-  [uuid()]: {
+  // Uncomment to see default entry in app
+  /* '4349fd1c-fb96-4d57-9812-b1e26afef962': {
     name: 'First dict',
     data: [
       { from: 'ph', to: 'Biology' },
       { from: 'Atoms', to: 'Chemistry' },
       { from: 'Circuit Building', to: 'Physics' },
     ],
-  },
-  [uuid()]: {
-    name: 'First dict',
-    data: [
-      { from: 'ph', to: 'Biology' },
-      { from: 'Atoms', to: 'Chemistry' },
-      { from: 'Circuit Building', to: 'Physics' },
-    ],
-  },
-  [uuid()]: {
-    name: 'First dict',
-    data: [
-      { from: 'ph', to: 'Biology' },
-      { from: 'Atoms', to: 'Chemistry' },
-      { from: 'Circuit Building', to: 'Physics' },
-    ],
-  },
-  [uuid()]: {
-    name: 'First dict',
-    data: [
-      { from: 'ph', to: 'Biology' },
-      { from: 'Atoms', to: 'Chemistry' },
-      { from: 'Circuit Building', to: 'Physics' },
-    ],
-  },
-  [uuid()]: {
-    name: 'First dict',
-    data: [
-      { from: 'ph', to: 'Biology' },
-      { from: 'Atoms', to: 'Chemistry' },
-      { from: 'Circuit Building', to: 'Physics' },
-    ],
-  },
-  [uuid()]: {
-    name: 'First dict',
-    data: [
-      { from: 'ph', to: 'Biology' },
-      { from: 'Atoms', to: 'Chemistry' },
-      { from: 'Circuit Building', to: 'Physics' },
-    ],
-  },
+  }, */
 }
 
 export const {
@@ -84,7 +44,9 @@ export const {
   },
 })
 
-const rootReducer = combineReducers({ dictionaries: dictionariesReducer })
+export const rootReducer = combineReducers({
+  dictionaries: dictionariesReducer,
+})
 
 export const store = configureStore({
   reducer: rootReducer,

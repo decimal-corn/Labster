@@ -9,8 +9,8 @@ const validatePair: FieldValidator<DictionaryPair[]> = (pairs) => {
   // Returning array of objects, due to an error in 'final-form-arrays', which splits strings by a single letter
   const fromSet = new Set()
   return pairs.map((pair) => {
-    if (!pair.from.trim() || !pair.to.trim()) {
-      return { errorText: 'Both pair values should contain a value' }
+    if (!pair.from || !pair.from.trim() || !pair.to || !pair.to.trim()) {
+      return { errorText: 'Both pair fields should contain a value' }
     }
     if (fromSet.has(pair.from.trim())) {
       return {
@@ -38,13 +38,20 @@ export const DictionaryPairsCard = () => {
                 <Col lg={{ span: 1 }} />
               </Row>
               {fields.map((name, index) => (
-                <div className='mb-2' key={name}>
+                <div
+                  className='mb-2'
+                  key={name}
+                  data-testid='dictionary-form-pair-testid'
+                >
                   <Row>
                     <Field name={`${name}.from`}>
                       {({ input }) => {
                         return (
                           <Col>
-                            <Form.Control {...input} />
+                            <Form.Control
+                              data-testid='dictionary-form-from-input'
+                              {...input}
+                            />
                           </Col>
                         )
                       }}
@@ -52,7 +59,10 @@ export const DictionaryPairsCard = () => {
                     <Field name={`${name}.to`}>
                       {({ input }) => (
                         <Col>
-                          <Form.Control {...input} />
+                          <Form.Control
+                            data-testid='dictionary-form-to-input'
+                            {...input}
+                          />
                         </Col>
                       )}
                     </Field>

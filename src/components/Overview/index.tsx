@@ -4,6 +4,7 @@ import { getDictionaries } from '../../selectors'
 import { Button, Card, CardColumns, Modal } from 'react-bootstrap'
 import { remove } from '../../store'
 import { DictionaryCard } from './DictionaryCard'
+import { Link } from 'react-router-dom'
 
 export const Overview = () => {
   const dictionaries = useSelector(getDictionaries)
@@ -31,6 +32,16 @@ export const Overview = () => {
               />
             ))}
           </CardColumns>
+          {!Object.keys(dictionaries).length && (
+            <Card>
+              <Card.Body>
+                <Card.Title>There are no dictonaries</Card.Title>
+                <Button as={Link} to='/new'>
+                  Create one
+                </Button>
+              </Card.Body>
+            </Card>
+          )}
         </Card.Body>
       </Card>
       {removingDictionary && (

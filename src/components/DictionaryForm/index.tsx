@@ -15,7 +15,7 @@ import { DictionaryNameCard } from './DictionaryNameCard'
 
 const validate = (values: Dictionary) => {
   const validationResult: ValidationErrors = {}
-  if (!values.name.trim()) {
+  if (!values.name || !values.name.trim()) {
     validationResult.name = 'Name could not be empty'
   }
   return validationResult
