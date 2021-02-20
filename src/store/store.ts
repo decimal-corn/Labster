@@ -4,7 +4,7 @@ import {
   PayloadAction,
   combineReducers,
 } from '@reduxjs/toolkit'
-import { Dictionary } from './types'
+import { Dictionary } from '../types'
 
 export type RootState = {
   dictionaries: Record<string, Dictionary>
@@ -24,18 +24,18 @@ const initialState: Record<string, Dictionary> = {
 
 export const {
   reducer: dictionariesReducer,
-  actions: { push, remove },
+  actions: { pushDictionary, removeDictionary },
 } = createSlice({
   name: 'dictionaries',
   initialState,
   reducers: {
-    push: (
+    pushDictionary: (
       state,
       action: PayloadAction<{ dictionary: Dictionary; id: string }>,
     ) => {
       state[action.payload.id] = action.payload.dictionary
     },
-    remove: (state, action: PayloadAction<{ id: string }>) => {
+    removeDictionary: (state, action: PayloadAction<{ id: string }>) => {
       const id = action.payload.id
       if (state[id]) {
         delete state[id]

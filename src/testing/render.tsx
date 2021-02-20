@@ -3,7 +3,7 @@ import React from 'react'
 import { createBrowserHistory } from 'history'
 import { Provider } from 'react-redux'
 import { Router } from 'react-router-dom'
-import { rootReducer } from '../store'
+import { rootReducer } from '../store/store'
 import { configureStore } from '@reduxjs/toolkit'
 
 export const renderComponent = (component: React.ReactElement, path = '/') => {

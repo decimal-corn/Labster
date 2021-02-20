@@ -1,4 +1,4 @@
-import { push, store } from '../store'
+import { pushDictionary, store } from '../store/store'
 import { Dictionary } from '../types'
 
 export const TEST_DICTIONARY_1 = {
@@ -8,13 +8,13 @@ export const TEST_DICTIONARY_1 = {
 
 export const TEST_DICTIONARY_1_ID = 'id-1'
 
-export const pushDictionary = (
+export const pushTestDictionary = (
   mockStore: typeof store,
   dictionary: Dictionary,
   id: string,
 ) => {
   mockStore.dispatch(
-    push({
+    pushDictionary({
       dictionary,
       id,
     }),

@@ -1,8 +1,8 @@
 import React, { useCallback, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getDictionaries } from '../../selectors'
+import { getDictionaries } from '../../store/selectors'
 import { Button, Card, CardColumns, Modal } from 'react-bootstrap'
-import { remove } from '../../store'
+import { removeDictionary } from '../../store/store'
 import { DictionaryCard } from './DictionaryCard'
 import { Link } from 'react-router-dom'
 
@@ -15,7 +15,7 @@ export const Overview = () => {
   >()
 
   const onDictionaryRemove = useCallback((id: string) => {
-    dispatch(remove({ id }))
+    dispatch(removeDictionary({ id }))
   }, [])
 
   return (

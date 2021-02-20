@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Card, Table } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { getDictionaries } from '../../selectors'
+import { getDictionaries } from '../../store/selectors'
 
 type Props = {
   dictionaryKey: string

@@ -5,8 +5,8 @@ import arrayMutators from 'final-form-arrays'
 import { Button, Card, Form } from 'react-bootstrap'
 import { Form as FinalForm } from 'react-final-form'
 import { useDispatch, useSelector } from 'react-redux'
-import { push, RootState } from '../../store'
-import { getDictionary } from '../../selectors'
+import { pushDictionary, RootState } from '../../store/store'
+import { getDictionary } from '../../store/selectors'
 import { Link } from 'react-router-dom'
 import { Dictionary } from '../../types'
 import { ValidationErrors } from 'final-form'
@@ -49,7 +49,7 @@ export const DictionaryForm = () => {
     <Card className='border-secondary'>
       <FinalForm
         onSubmit={(values) => {
-          dispatch(push({ dictionary: values, id }))
+          dispatch(pushDictionary({ dictionary: values, id }))
           history.push('/')
         }}
         validate={validate}

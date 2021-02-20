@@ -3,7 +3,7 @@ import { screen } from '@testing-library/react'
 import React from 'react'
 import { App } from '../../App'
 import {
-  pushDictionary,
+  pushTestDictionary,
   TEST_DICTIONARY_1,
   TEST_DICTIONARY_1_ID,
 } from '../../testing/dictionary'
@@ -30,7 +30,7 @@ describe('Testing DictionaryForm component', () => {
 
   test('Should render a form with fields from dictionary', () => {
     const { store, history } = renderComponent(<App />)
-    pushDictionary(store, TEST_DICTIONARY_1, TEST_DICTIONARY_1_ID)
+    pushTestDictionary(store, TEST_DICTIONARY_1, TEST_DICTIONARY_1_ID)
     history.push(`/edit/${TEST_DICTIONARY_1_ID}`)
 
     expect(screen.getByDisplayValue(TEST_DICTIONARY_1.name)).toBeInTheDocument()
@@ -47,7 +47,7 @@ describe('Testing DictionaryForm component', () => {
 
   test('Should edit an existing dictionary', () => {
     const { store, history } = renderComponent(<App />)
-    pushDictionary(store, TEST_DICTIONARY_1, TEST_DICTIONARY_1_ID)
+    pushTestDictionary(store, TEST_DICTIONARY_1, TEST_DICTIONARY_1_ID)
     history.push(`/edit/${TEST_DICTIONARY_1_ID}`)
     const nameField = screen.getByDisplayValue(TEST_DICTIONARY_1.name)
     userEvent.clear(nameField)
@@ -74,7 +74,7 @@ describe('Testing DictionaryForm component', () => {
 
   test('Should catch invalid form values', () => {
     const { store, history } = renderComponent(<App />)
-    pushDictionary(store, TEST_DICTIONARY_1, TEST_DICTIONARY_1_ID)
+    pushTestDictionary(store, TEST_DICTIONARY_1, TEST_DICTIONARY_1_ID)
     history.push(`/edit/${TEST_DICTIONARY_1_ID}`)
     const saveButton = screen.getByText('Save')
 

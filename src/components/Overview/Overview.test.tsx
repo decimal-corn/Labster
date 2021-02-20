@@ -3,7 +3,7 @@ import { screen } from '@testing-library/react'
 import { renderComponent } from '../../testing/render'
 import userEvent from '@testing-library/user-event'
 import {
-  pushDictionary,
+  pushTestDictionary,
   TEST_DICTIONARY_1,
   TEST_DICTIONARY_1_ID,
 } from '../../testing/dictionary'
@@ -17,7 +17,7 @@ describe('Testing Overview component', () => {
 
   test('Should display dictionaries', async () => {
     const { store } = renderComponent(<App />)
-    pushDictionary(store, TEST_DICTIONARY_1, TEST_DICTIONARY_1_ID)
+    pushTestDictionary(store, TEST_DICTIONARY_1, TEST_DICTIONARY_1_ID)
     expect(
       screen.queryByText('There are no dictonaries'),
     ).not.toBeInTheDocument()
@@ -28,7 +28,7 @@ describe('Testing Overview component', () => {
 
   test('Should display confirmation before removing and remove dictionary after confirmation', async () => {
     const { store } = renderComponent(<App />)
-    pushDictionary(store, TEST_DICTIONARY_1, TEST_DICTIONARY_1_ID)
+    pushTestDictionary(store, TEST_DICTIONARY_1, TEST_DICTIONARY_1_ID)
     const delButton = screen.getByText('Remove')
     userEvent.click(delButton)
     expect(
@@ -44,7 +44,7 @@ describe('Testing Overview component', () => {
 
   test('Should display confirmation before removing and NOT remove dictionary on cancel', async () => {
     const { store } = renderComponent(<App />)
-    pushDictionary(store, TEST_DICTIONARY_1, TEST_DICTIONARY_1_ID)
+    pushTestDictionary(store, TEST_DICTIONARY_1, TEST_DICTIONARY_1_ID)
     const delButton = screen.getByText('Remove')
     userEvent.click(delButton)
     expect(
@@ -59,7 +59,7 @@ describe('Testing Overview component', () => {
 
   test('Should open editing page on dictionary edit', async () => {
     const { store, history } = renderComponent(<App />)
-    pushDictionary(store, TEST_DICTIONARY_1, TEST_DICTIONARY_1_ID)
+    pushTestDictionary(store, TEST_DICTIONARY_1, TEST_DICTIONARY_1_ID)
     const editButton = screen.getByText('Edit')
     userEvent.click(editButton)
     expect(history.location.pathname).toEqual(`/edit/${TEST_DICTIONARY_1_ID}`)
