@@ -15,9 +15,49 @@ const initialState: Record<string, Dictionary> = {
   [uuid()]: {
     name: 'First dict',
     data: [
-      { left: 'ph', right: 'Biology' },
-      { left: 'Atoms', right: 'Chemistry' },
-      { left: 'Circuit Building', right: 'Physics' },
+      { from: 'ph', to: 'Biology' },
+      { from: 'Atoms', to: 'Chemistry' },
+      { from: 'Circuit Building', to: 'Physics' },
+    ],
+  },
+  [uuid()]: {
+    name: 'First dict',
+    data: [
+      { from: 'ph', to: 'Biology' },
+      { from: 'Atoms', to: 'Chemistry' },
+      { from: 'Circuit Building', to: 'Physics' },
+    ],
+  },
+  [uuid()]: {
+    name: 'First dict',
+    data: [
+      { from: 'ph', to: 'Biology' },
+      { from: 'Atoms', to: 'Chemistry' },
+      { from: 'Circuit Building', to: 'Physics' },
+    ],
+  },
+  [uuid()]: {
+    name: 'First dict',
+    data: [
+      { from: 'ph', to: 'Biology' },
+      { from: 'Atoms', to: 'Chemistry' },
+      { from: 'Circuit Building', to: 'Physics' },
+    ],
+  },
+  [uuid()]: {
+    name: 'First dict',
+    data: [
+      { from: 'ph', to: 'Biology' },
+      { from: 'Atoms', to: 'Chemistry' },
+      { from: 'Circuit Building', to: 'Physics' },
+    ],
+  },
+  [uuid()]: {
+    name: 'First dict',
+    data: [
+      { from: 'ph', to: 'Biology' },
+      { from: 'Atoms', to: 'Chemistry' },
+      { from: 'Circuit Building', to: 'Physics' },
     ],
   },
 }

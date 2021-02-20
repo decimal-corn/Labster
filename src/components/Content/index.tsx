@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Redirect, Route, Switch } from 'react-router-dom'
 import { Overview } from '../Overview'
 import { DictionaryForm } from '../DictionaryForm'
 
@@ -9,12 +9,10 @@ export const Content = () => {
       <Route exact path='/'>
         <Overview />
       </Route>
-      <Route path='/new'>
+      <Route path={['/new', '/edit/:id']}>
         <DictionaryForm />
       </Route>
-      <Route path='/edit/:id'>
-        <DictionaryForm />
-      </Route>
+      <Redirect to='/' />
     </Switch>
   )
 }

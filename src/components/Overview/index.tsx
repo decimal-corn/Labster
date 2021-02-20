@@ -1,63 +1,65 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getDictionaries } from '../../selectors'
-import { Button, Card, Col, Container, Row, Table } from 'react-bootstrap'
+import { Button, Card, CardColumns, Modal } from 'react-bootstrap'
 import { remove } from '../../store'
-import { Link } from 'react-router-dom'
+import { DictionaryCard } from './DictionaryCard'
 
 export const Overview = () => {
   const dictionaries = useSelector(getDictionaries)
   const dispatch = useDispatch()
+
+  const [removingDictionary, setRemovingDictionary] = useState<
+    string | undefined
+  >()
 
   const onDictionaryRemove = useCallback((id: string) => {
     dispatch(remove({ id }))
   }, [])
 
   return (
-    <Container fluid>
-      <Row>
-        {Object.keys(dictionaries).map((key) => (
-          <Col lg={4} key={key}>
-            <Card>
-              <Card.Header as='h5'>{dictionaries[key].name}</Card.Header>
-              <Card.Body>
-                <Table striped bordered hover>
-                  <thead>
-                    <tr>
-                      <th>From</th>
-                      <th>To</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {dictionaries[key].data.map((row) => (
-                      <tr key={row.left + row.right}>
-                        <td>{row.left}</td>
-                        <td>{row.right}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </Table>
-              </Card.Body>
-              <Card.Footer>
-                <Button
-                  variant='primary'
-                  className='mr-2'
-                  as={Link}
-                  to={`/edit/${key}`}
-                >
-                  Edit
-                </Button>
-                <Button
-                  variant='danger'
-                  onClick={() => onDictionaryRemove(key)}
-                >
-                  Remove
-                </Button>
-              </Card.Footer>
-            </Card>
-          </Col>
-        ))}
-      </Row>
-    </Container>
+    <>
+      <Card className='border-secondary'>
+        <Card.Header className='bg-secondary text-white'>Overview</Card.Header>
+        <Card.Body className='bg-light'>
+          <CardColumns>
+            {Object.keys(dictionaries).map((key) => (
+              <DictionaryCard
+                key={key}
+                dictionaryKey={key}
+                setRemovingDictionary={setRemovingDictionary}
+              />
+            ))}
+          </CardColumns>
+        </Card.Body>
+      </Card>
+      {removingDictionary && (
+        <Modal show={true} onHide={() => setRemovingDictionary(undefined)}>
+          <Modal.Header closeButton>
+            <Modal.Title>Confirm</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {`Confirm removing the "${dictionaries[removingDictionary].name}" dictionary`}
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              variant='secondary'
+              onClick={() => setRemovingDictionary(undefined)}
+            >
+              Cancel
+            </Button>
+            <Button
+              variant='danger'
+              onClick={() => {
+                setRemovingDictionary(undefined)
+                onDictionaryRemove(removingDictionary)
+              }}
+            >
+              Remove
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      )}
+    </>
   )
 }
